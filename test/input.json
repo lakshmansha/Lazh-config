@@ -1,0 +1,14 @@
+[
+    {
+        "Name": "Sample App",
+        "Code": "sample",
+        "Envirnoments": [
+             {
+                "EnvName": "cdev",
+                "EnvConfig": {
+                   "Key":  "Value"
+                }
+            }
+        ]
+    }
+]
