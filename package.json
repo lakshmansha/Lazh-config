@@ -1,0 +1,19 @@
+{
+  "name": "qatra_config",
+  "version": "1.0.0",
+  "description": "configuration file generation solution for various environments",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "keywords": [
+    "config",
+    "12Factor"
+  ],
+  "author": "Lakshman.S",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0"
+  }
+}
