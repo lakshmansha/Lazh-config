@@ -1,5 +1,6 @@
+const _path = require('path');
+
 var common = require('./common');
-var fs = require('fs');
 
 const getConfig = async (app, env, path) => {
     const _path = await getFilePath(path);

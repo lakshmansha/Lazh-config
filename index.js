@@ -1,15 +1,23 @@
 var colors = require('colors');
 
+var logger = require('./logger');
+const log = new logger.Logger();
+
 var main = require('./main');
 var common = require('./common');
 
-var params = common.getArgs();
-main.onInit(params).then(res => {
-    if (res) {
-        console.log('\r');
-    }
-}, (error) => {
-    console.error(colors.red(error));
-    console.log('\r');
-    process.exit();
-});
+async function Init() {
+    log.enableProductionMode();
+    var params = common.getArgs();
+    main.onInit(params).then(res => {
+        if (res) {
+            log.info('\r');
+        }
+    }, (error) => {
+        log.error(colors.red(error));
+        log.info('\r');
+        process.exit();
+    });
+}
+
+Init();

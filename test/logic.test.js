@@ -1,6 +1,7 @@
-const chaiReq = require('chai');
-const common = require('../common');
 const _path = require('path');
+const chaiReq = require('chai');
+
+const common = require('../common');
 
 describe(' Logic Module Test ', () => {
     let Logic;
