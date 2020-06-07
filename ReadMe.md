@@ -27,8 +27,8 @@ Example
 ```json 
 [
     {
-        "Name": "12 Factor App",
-        "Code": "12factor",
+        "Name": "Sample App",
+        "Code": "sample",
         "Envirnoments": [
              {
                 "EnvName": "cdev",

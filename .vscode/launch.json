@@ -7,15 +7,57 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Generate Config 12Factor on CDEV",
+            "name": "Generate Config",
             "skipFiles": [
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\index.js",
             "args": [
-                "--path=config/env-input.json",
-                "--app=12factor",
+                "--path=test/input.json",
+                "--app=sample",
                 "--env=cdev"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Generate Config No Path",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\index.js",
+            "args": [
+                "--path=",
+                "--app=sample",
+                "--env=cdev"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Generate Config No Name",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\index.js",
+            "args": [
+                "--path=test/input.json",
+                "--app=",
+                "--env=cdev"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Generate Config No ENV",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\index.js",
+            "args": [
+                "--path=test/input.json",
+                "--app=sample",
+                "--env="
             ]
         }
     ]

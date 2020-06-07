@@ -49,6 +49,18 @@ var isValid = (value) => {
     return rtnVal;
 }
 
+var isObjValid = (value) => {
+    var rtnVal = false;
+    if (value !== undefined && value !== null) {
+        if (Object.keys(value).length > 0) {
+            rtnVal = true;
+        }
+    }
+
+    return rtnVal;
+}
+
 exports.getArgs = getArgs;
 exports.createDirectories = createDirectories;
 exports.isValid = isValid;
+exports.isObjValid = isObjValid;
