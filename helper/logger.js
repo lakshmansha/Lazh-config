@@ -60,6 +60,9 @@ let Logger = /** @class */ (() => {
                 Logger.outputs.forEach(output => output.apply(output, [this.source, level].concat(objects)));
             }
         }
+        level() {
+            return Logger.level;
+        }
     }
     /**
      * Current logging level.
