@@ -1,6 +1,6 @@
 var colors = require('colors');
 
-var logger = require('./logger');
+var logger = require('./helper/logger');
 const log = new logger.Logger();
 
 var main = require('./main');
@@ -20,4 +20,4 @@ async function Init() {
     });
 }
 
-Init();
+exports.Init = Init;

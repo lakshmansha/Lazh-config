@@ -1,7 +1,7 @@
 var fs = require('fs');
 var colors = require('colors');
 
-var logger = require('./logger');
+var logger = require('./helper/logger');
 const log = new logger.Logger();
 
 var common = require('./common');

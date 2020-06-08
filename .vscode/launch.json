@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\index.js",
+            "program": "${workspaceFolder}\\start.js",
             "args": [
                 "--path=test/input.json",
                 "--app=sample",
@@ -25,7 +25,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\index.js",
+            "program": "${workspaceFolder}\\start.js",
             "args": [
                 "--path=",
                 "--app=sample",
@@ -39,7 +39,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\index.js",
+            "program": "${workspaceFolder}\\start.js",
             "args": [
                 "--path=test/input.json",
                 "--app=",
@@ -53,7 +53,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\index.js",
+            "program": "${workspaceFolder}\\start.js",
             "args": [
                 "--path=test/input.json",
                 "--app=sample",

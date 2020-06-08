@@ -1,16 +1,16 @@
 {
-  "name": "qatra_config",
-  "version": "1.0.0",
-  "description": "configuration file generation solution for various environments",
-  "main": "index.js",
+  "name": "lazh-config",
+  "version": "0.0.1",
+  "description": "configuration file generation solution for various environments in SASS Apps.",
+  "main": "start.js",
   "scripts": {
-    "start": "node index",
+    "start": "node start",
     "test": "mocha"
   },
   "keywords": [
     "config",
     "12Factor"
-  ],
+  ],  
   "author": "Lakshman.S",
   "license": "ISC",
   "dependencies": {
