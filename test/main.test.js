@@ -1,6 +1,6 @@
 const chaiReq = require('chai');
 
-var logger = require('../logger');
+var logger = require('../helper/logger');
 
 const log = new logger.Logger();
 

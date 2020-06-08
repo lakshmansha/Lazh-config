@@ -1,4 +1,5 @@
 const _path = require('path');
+const fs = require('fs');
 
 var common = require('./common');
 
