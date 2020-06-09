@@ -76,11 +76,11 @@ async function onInit(params) {
                             log.info('\r');
 
                             const search = '/';
-                            const replacer = new RegExp(search, 'g')
+                            const replacer = new RegExp(search, 'g');
 
                             var temp_file_path = file_outputName.substring(1);
                             var dir_path = temp_file_path.replace(replacer, '\\');
-                            var file_path = __dirname + dir_path;
+                            var file_path = process.cwd() + dir_path;
                             log.info(`${colors.green("Generated File Located Path")}: ${colors.green(file_path)}`);
                             resolve(true);
                             // fs.readFile(file_outputName, function (err, data) {

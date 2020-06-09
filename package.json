@@ -1,20 +1,28 @@
 {
-  "name": "lazh-config",
+  "name": "@lazh/config",
   "version": "0.0.1",
   "description": "configuration file generation solution for various environments in SASS Apps.",
-  "main": "start.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node start",
+    "start": "node index",
+    "build": "",
     "test": "mocha"
   },
   "keywords": [
     "config",
-    "12Factor"
+    "12Factor",
+    "cli"
   ],
+  "bin": {
+    "lzconfig": "index.js"
+  },
   "author": "Lakshman.S",
   "license": "ISC",
   "dependencies": {
     "colors": "^1.4.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
     "chai": "^4.2.0",

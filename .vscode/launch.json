@@ -11,53 +11,11 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\start.js",
+            "program": "${workspaceFolder}\\index.js",
             "args": [
-                "--path=test/input.json",
+                "--path=input.json",
                 "--app=sample",
                 "--env=cdev"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Generate Config No Path",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}\\start.js",
-            "args": [
-                "--path=",
-                "--app=sample",
-                "--env=cdev"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Generate Config No Name",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}\\start.js",
-            "args": [
-                "--path=test/input.json",
-                "--app=",
-                "--env=cdev"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Generate Config No ENV",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}\\start.js",
-            "args": [
-                "--path=test/input.json",
-                "--app=sample",
-                "--env="
             ]
         }
     ]

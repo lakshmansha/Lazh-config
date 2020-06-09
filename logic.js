@@ -139,7 +139,7 @@ const getFilePath = (path) => {
             resolve('');
         }
 
-        const _currentPath = require('path').resolve(__dirname, path);
+        const _currentPath = require('path').resolve(process.cwd(), path);
         if (fs.exists(_currentPath, (exists) => {
             if (exists) {
                 resolve(_currentPath);
