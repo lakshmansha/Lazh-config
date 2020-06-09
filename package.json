@@ -1,19 +1,31 @@
 {
-  "name": "qatra_config",
-  "version": "1.0.0",
-  "description": "configuration file generation solution for various environments",
+  "name": "@lazh/config",
+  "version": "0.0.1",
+  "description": "configuration file generation solution for various environments in SASS Apps.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index"
+    "start": "node index",
+    "build": "",
+    "test": "mocha"
   },
   "keywords": [
     "config",
-    "12Factor"
+    "12Factor",
+    "cli"
   ],
+  "bin": {
+    "lzconfig": "index.js"
+  },
   "author": "Lakshman.S",
   "license": "ISC",
   "dependencies": {
     "colors": "^1.4.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.2.0"
   }
 }

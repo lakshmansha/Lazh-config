@@ -115,6 +115,10 @@ dist
 .yarn/build-state.yml
 .pnp.*
 
-# Remove Config
+# Node Build
 
+bin
+
+# Remove Config
 config/env-input.json
+input.json
