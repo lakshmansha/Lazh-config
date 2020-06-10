@@ -2,7 +2,7 @@ var fs = require('fs');
 var colors = require('colors');
 
 var logger = require('./helper/logger');
-var download = require('./helper/download');
+
 var common = require('./common');
 var logic = require('./logic');
 
@@ -14,8 +14,14 @@ log.enableProductionMode();
 async function onInit(params) {
     return new Promise(async (resolve, reject) => {
         try {
-            var file_directory = `/dist/${params['app']}/${params['env']}`;
-            var file_outputName = `.${file_directory}/config.json`;
+            var file_directory =  "";             
+            var output = params['output'];
+
+            if(common.isValid(output)) {
+                file_directory = output;                   
+            } else {
+                file_directory = `.\\dist\\${params['app']}\\${params['env']}`;
+            }                    
 
             var path = params['path'];
             if (!common.isValid(path)) { reject('Pass the Configuration Path to generate Config. eg: --path=path/env-input.json'); return; }
@@ -67,8 +73,9 @@ async function onInit(params) {
             if (LogLevel.Off === log.level()) {
                 resolve(true);
             } else {
-                const status = await common.createDirectories(file_directory);
-                if (status) {
+                const folder_path = await common.createDirectories(file_directory);
+                if (common.isValid(folder_path)) {
+                    var file_outputName = `${folder_path}\\config.json`;
                     log.info(`${colors.magenta("Created Configuration File Path for Envirnonment")}`);
 
                     fs.writeFile(file_outputName, JSON.stringify(config), async (err) => {
@@ -78,11 +85,9 @@ async function onInit(params) {
 
                         const search = '/';
                         const replacer = new RegExp(search, 'g');
-
-                        var temp_file_path = file_outputName.substring(1);
-                        var dir_path = temp_file_path.replace(replacer, '\\');
-                        var file_path = process.cwd() + dir_path;
-                        log.info(`${colors.green("Generated File Located Path")}: ${colors.green(file_path)}`);
+                        
+                        var dir_path = file_outputName.replace(replacer, '\\');                        
+                        log.info(`${colors.green("Generated File Located Path")}: ${colors.green(dir_path)}`);
                         const isExist = await logic.getFilePath('/temp');
                         let rmstatus = false;
                         if(common.isValid(isExist)) {

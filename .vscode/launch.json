@@ -13,9 +13,10 @@
             ],
             "program": "${workspaceFolder}\\index.js",
             "args": [
-                "--path=https://extendsclass.com/api/json-storage/bin/cdfbabf",
+                "--path=input.json",
                 "--app=sample",
-                "--env=cdev"
+                "--env=cdev",
+                "--output=E:/assets/config"
             ]
         }
     ]

@@ -36,12 +36,12 @@ var createDirectories = (pathname) => {
     return new Promise((resolve) => {
         var __dirname = process.cwd();
         pathname = pathname.replace(/^\.*\/|\/?[^\/]+\.[a-z]+|\/$/g, ''); // Remove leading directory markers, and remove ending /file-name.extension
-        fs.mkdir(path.resolve(__dirname, pathname), { recursive: true }, e => {
+        fs.mkdir(path.resolve(__dirname, pathname), { recursive: true }, (e) => {
             if (e) {
                 log.error(e);
-                resolve(false)
+                resolve('')
             } else {
-                resolve(true);
+                resolve(path.resolve(__dirname, pathname));
             }
         });
     });   
