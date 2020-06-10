@@ -120,5 +120,4 @@ dist
 bin
 
 # Remove Config
-config/env-input.json
 input.json

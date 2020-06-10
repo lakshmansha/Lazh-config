@@ -55,14 +55,33 @@ npm install -g @lazh/config
 To Generate Configuration for App with its Environment.
 
 ```node
-lzconfig --path=<path> --app=<appname> --env=<environment>
+lzconfig --path=<path> --app=<appname> --env=<environment> --output=<output-path>
 ```
 
 Example
 
 ```node
-lzconfig --path=input.json --app=sample --env=cdev
+lzconfig --path=input.json --app=sample --env=cdev --output=e:\assets\config
 ```
+
+### Parameters :
+
+1. **Path**
+    - To Provide Configuration File Path.
+    
+1. **App** 
+    - Name of the App available in Configuration.
+
+1. **Env**
+    - Environment of the App available in Configuration.
+
+1. **Output** 
+    - Optional parameter to create config file with directory.
+    - Default Path: Currently Directory + /dist/appname/environment.
+
+### Output : 
+
+- **Config.json** File will be generated with default or Specified Output Path.
 
 
 ## License

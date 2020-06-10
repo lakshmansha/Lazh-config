@@ -2,19 +2,26 @@ var fs = require('fs');
 var colors = require('colors');
 
 var logger = require('./helper/logger');
-const log = new logger.Logger();
-const LogLevel = logger.LogLevel;
 
 var common = require('./common');
 var logic = require('./logic');
+
+const log = new logger.Logger();
+const LogLevel = logger.LogLevel;
 
 log.enableProductionMode();
 
 async function onInit(params) {
     return new Promise(async (resolve, reject) => {
         try {
-            var file_directory = `/dist/${params['app']}/${params['env']}`;
-            var file_outputName = `.${file_directory}/config.json`;
+            var file_directory =  "";             
+            var output = params['output'];
+
+            if(common.isValid(output)) {
+                file_directory = output;                   
+            } else {
+                file_directory = `.\\dist\\${params['app']}\\${params['env']}`;
+            }                    
 
             var path = params['path'];
             if (!common.isValid(path)) { reject('Pass the Configuration Path to generate Config. eg: --path=path/env-input.json'); return; }
@@ -66,36 +73,42 @@ async function onInit(params) {
             if (LogLevel.Off === log.level()) {
                 resolve(true);
             } else {
-                common.createDirectories(file_directory, (status) => {
-                    if (status) {
-                        log.info(`${colors.magenta("Created Configuration File Path for Envirnonment")}`);
+                const folder_path = await common.createDirectories(file_directory);
+                if (common.isValid(folder_path)) {
+                    var file_outputName = `${folder_path}\\config.json`;
+                    log.info(`${colors.magenta("Created Configuration File Path for Envirnonment")}`);
 
-                        fs.writeFile(file_outputName, JSON.stringify(config), (err) => {
-                            if (err) { reject(err); return; }
-                            log.info(`${colors.magenta("Generated Config File (JSON) Completed.")}`);
-                            log.info('\r');
+                    fs.writeFile(file_outputName, JSON.stringify(config), async (err) => {
+                        if (err) { reject(err); return; }
+                        log.info(`${colors.magenta("Generated Config File (JSON) Completed.")}`);
+                        log.info('\r');
 
-                            const search = '/';
-                            const replacer = new RegExp(search, 'g');
-
-                            var temp_file_path = file_outputName.substring(1);
-                            var dir_path = temp_file_path.replace(replacer, '\\');
-                            var file_path = process.cwd() + dir_path;
-                            log.info(`${colors.green("Generated File Located Path")}: ${colors.green(file_path)}`);
+                        const search = '/';
+                        const replacer = new RegExp(search, 'g');
+                        
+                        var dir_path = file_outputName.replace(replacer, '\\');                        
+                        log.info(`${colors.green("Generated File Located Path")}: ${colors.green(dir_path)}`);
+                        const isExist = await logic.getFilePath('/temp');
+                        let rmstatus = false;
+                        if(common.isValid(isExist)) {
+                            rmstatus = await common.deleteDirectories('/temp');
                             resolve(true);
-                            // fs.readFile(file_outputName, function (err, data) {
-                            //     if (err) throw err;
-                            //     log.info(`${colors.magenta("Generated Config File (JSON).")}`);
-                            //     if (data) {
-                            //         var config_output = require(`./${file_outputName}`);
-                            //         log.info(config_output);
-                            //     }
-                            // });
-                        });
-                    } else {
-                        reject('Unable to Create Configuration File Path '); return;
-                    }
-                });
+                        } else {
+                            resolve(true);
+                        }
+
+                        // fs.readFile(file_outputName, function (err, data) {
+                        //     if (err) throw err;
+                        //     log.info(`${colors.magenta("Generated Config File (JSON).")}`);
+                        //     if (data) {
+                        //         var config_output = require(`./${file_outputName}`);
+                        //         log.info(config_output);
+                        //     }
+                        // });
+                    });
+                } else {
+                    reject('Unable to Create Configuration File Path '); return;
+                }
             }
         } catch (error) {
             reject(error);

@@ -1,6 +1,13 @@
 var path = require('path');
 var fs = require('fs');
 
+var logger = require('./helper/logger');
+var logic = require('./logic');
+
+const log = new logger.Logger();
+
+log.enableProductionMode();
+
 var getArgs = () => {
     var args = {};
     process.argv
@@ -25,17 +32,34 @@ var getArgs = () => {
 }
 
 
-var createDirectories = (pathname, callback) => {
-    var __dirname = path.resolve();
-    pathname = pathname.replace(/^\.*\/|\/?[^\/]+\.[a-z]+|\/$/g, ''); // Remove leading directory markers, and remove ending /file-name.extension
-    fs.mkdir(path.resolve(__dirname, pathname), { recursive: true }, e => {
-        if (e) {
-            console.error(e);
-            callback(false)
-        } else {
-            callback(true);
-        }
-    });
+var createDirectories = (pathname) => {
+    return new Promise((resolve) => {
+        var __dirname = process.cwd();
+        pathname = pathname.replace(/^\.*\/|\/?[^\/]+\.[a-z]+|\/$/g, ''); // Remove leading directory markers, and remove ending /file-name.extension
+        fs.mkdir(path.resolve(__dirname, pathname), { recursive: true }, (e) => {
+            if (e) {
+                log.error(e);
+                resolve('')
+            } else {
+                resolve(path.resolve(__dirname, pathname));
+            }
+        });
+    });   
+}
+
+var deleteDirectories = (pathname) => {
+    return new Promise((resolve) => {
+        var __dirname = process.cwd();
+        pathname = pathname.replace(/^\.*\/|\/?[^\/]+\.[a-z]+|\/$/g, ''); // Remove leading directory markers, and remove ending /file-name.extension
+        fs.rmdir(path.resolve(__dirname, pathname), { recursive: true }, e => {
+            if (e) {
+                console.error(e);
+                resolve(false)
+            } else {
+                resolve(true);
+            }
+        });
+    });  
 }
 
 var isValid = (value) => {
@@ -60,7 +84,9 @@ var isObjValid = (value) => {
     return rtnVal;
 }
 
+
 exports.getArgs = getArgs;
 exports.createDirectories = createDirectories;
 exports.isValid = isValid;
 exports.isObjValid = isObjValid;
+exports.deleteDirectories = deleteDirectories;

@@ -1,6 +1,6 @@
 {
   "name": "@lazh/config",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "configuration file generation solution for various environments in SASS Apps.",
   "main": "index.js",
   "scripts": {

@@ -15,7 +15,8 @@
             "args": [
                 "--path=input.json",
                 "--app=sample",
-                "--env=cdev"
+                "--env=cdev",
+                "--output=E:/assets/config"
             ]
         }
     ]
