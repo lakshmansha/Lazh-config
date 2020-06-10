@@ -2,11 +2,12 @@ var fs = require('fs');
 var colors = require('colors');
 
 var logger = require('./helper/logger');
-const log = new logger.Logger();
-const LogLevel = logger.LogLevel;
-
+var download = require('./helper/download');
 var common = require('./common');
 var logic = require('./logic');
+
+const log = new logger.Logger();
+const LogLevel = logger.LogLevel;
 
 log.enableProductionMode();
 
@@ -66,36 +67,43 @@ async function onInit(params) {
             if (LogLevel.Off === log.level()) {
                 resolve(true);
             } else {
-                common.createDirectories(file_directory, (status) => {
-                    if (status) {
-                        log.info(`${colors.magenta("Created Configuration File Path for Envirnonment")}`);
+                const status = await common.createDirectories(file_directory);
+                if (status) {
+                    log.info(`${colors.magenta("Created Configuration File Path for Envirnonment")}`);
 
-                        fs.writeFile(file_outputName, JSON.stringify(config), (err) => {
-                            if (err) { reject(err); return; }
-                            log.info(`${colors.magenta("Generated Config File (JSON) Completed.")}`);
-                            log.info('\r');
+                    fs.writeFile(file_outputName, JSON.stringify(config), async (err) => {
+                        if (err) { reject(err); return; }
+                        log.info(`${colors.magenta("Generated Config File (JSON) Completed.")}`);
+                        log.info('\r');
 
-                            const search = '/';
-                            const replacer = new RegExp(search, 'g');
+                        const search = '/';
+                        const replacer = new RegExp(search, 'g');
 
-                            var temp_file_path = file_outputName.substring(1);
-                            var dir_path = temp_file_path.replace(replacer, '\\');
-                            var file_path = process.cwd() + dir_path;
-                            log.info(`${colors.green("Generated File Located Path")}: ${colors.green(file_path)}`);
+                        var temp_file_path = file_outputName.substring(1);
+                        var dir_path = temp_file_path.replace(replacer, '\\');
+                        var file_path = process.cwd() + dir_path;
+                        log.info(`${colors.green("Generated File Located Path")}: ${colors.green(file_path)}`);
+                        const isExist = await logic.getFilePath('/temp');
+                        let rmstatus = false;
+                        if(common.isValid(isExist)) {
+                            rmstatus = await common.deleteDirectories('/temp');
                             resolve(true);
-                            // fs.readFile(file_outputName, function (err, data) {
-                            //     if (err) throw err;
-                            //     log.info(`${colors.magenta("Generated Config File (JSON).")}`);
-                            //     if (data) {
-                            //         var config_output = require(`./${file_outputName}`);
-                            //         log.info(config_output);
-                            //     }
-                            // });
-                        });
-                    } else {
-                        reject('Unable to Create Configuration File Path '); return;
-                    }
-                });
+                        } else {
+                            resolve(true);
+                        }
+
+                        // fs.readFile(file_outputName, function (err, data) {
+                        //     if (err) throw err;
+                        //     log.info(`${colors.magenta("Generated Config File (JSON).")}`);
+                        //     if (data) {
+                        //         var config_output = require(`./${file_outputName}`);
+                        //         log.info(config_output);
+                        //     }
+                        // });
+                    });
+                } else {
+                    reject('Unable to Create Configuration File Path '); return;
+                }
             }
         } catch (error) {
             reject(error);

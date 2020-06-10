@@ -8,7 +8,7 @@ var common = require('./common');
 
 async function Init() {
     log.enableProductionMode();
-    var params = common.getArgs();
+    var params = common.getArgs();    
     main.onInit(params).then(res => {
         if (res) {
             log.info('\r');

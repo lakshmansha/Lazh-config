@@ -1,4 +1,3 @@
-const _path = require('path');
 const fs = require('fs');
 
 var common = require('./common');
@@ -149,6 +148,7 @@ const getFilePath = (path) => {
         }));
     });
 }
+
 
 exports.getConfig = getConfig;
 exports.getFilePath = getFilePath;
