@@ -5,42 +5,9 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "args": [
-                "-u",
-                "tdd",
-                "--timeout",
-                "999999",
-                "--colors",
-                "${workspaceFolder}/test"
-            ],
-            "internalConsoleOptions": "openOnSessionStart",
-            "name": "Mocha Tests",
-            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
-            "request": "launch",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "type": "pwa-node"
-        },
-        {
             "type": "node",
             "request": "launch",
             "name": "Generate Config",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}\\run.js",
-            "args": [
-                "--path=input.json",
-                "--app=sample",
-                "--env=cdev",
-                "--output=E:/assets/config"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "New Generate Config",
             "skipFiles": [
                 "<node_internals>/**"
             ],

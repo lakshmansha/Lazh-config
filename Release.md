@@ -1,5 +1,9 @@
 # Release History
 
+## Version 1.0.0:
+
+- Refactored the CLI with Help Options.
+
 ## Version 0.1.0:
 
 - Added Output Option Suppport for CLI.

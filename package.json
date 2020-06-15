@@ -1,6 +1,6 @@
 {
   "name": "@lazh/config",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "configuration file generation solution for various environments in SASS Apps.",
   "author": "Lakshman.S",
   "license": "MIT",
