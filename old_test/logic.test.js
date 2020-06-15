@@ -2,6 +2,7 @@ const _path = require('path');
 const chaiReq = require('chai');
 
 const common = require('../common');
+const validator = require('../utils/validator');
 
 describe(' Logic Module Test ', () => {
     let Logic;
@@ -109,7 +110,7 @@ describe(' Logic Module Test ', () => {
             const path = 'test/input.json';
 
             const config = await Logic.getConfig(app, env, path);
-            chaiReq.expect(common.isObjValid(config), ` Error On Provided Config File `);
+            chaiReq.expect(validator.isObjValid(config), ` Error On Provided Config File `);
             chaiReq.expect(config.AppName).to.equal(_config.AppName, ` Error While validation of Config Is Valid On App Name `);
             chaiReq.expect(config.Envirnoment).to.equal(_config.Envirnoment, ` Error While validation of Config Is Valid On Envirnoment `);
             chaiReq.expect(config.message).to.equal(_config.message, ` Error While validation of Config Is Valid On Message `);
@@ -157,7 +158,7 @@ describe(' Logic Module Test ', () => {
             const path = 'test/input.json';
 
             const config = await Logic.getConfig(app, env, path);
-            chaiReq.expect(common.isObjValid(config), ` Error On Provided Config File `);
+            chaiReq.expect(validator.isObjValid(config), ` Error On Provided Config File `);
             chaiReq.expect(config.AppName).to.equal(_config.AppName, ` Error While validation of Config Is Valid On App Name `);
             chaiReq.expect(config.Envirnoment).to.equal(_config.Envirnoment, ` Error While validation of Config Is Valid On Envirnoment `);
             chaiReq.expect(config.message).to.equal(_config.message, ` Error While validation of Config Is Valid On Message `);

@@ -1,44 +1,46 @@
 # Lazh-Config
 
+## IMPORTANT ( Breaking Changes ) !!! 
+
 ## Description
 
-Configuration Tools Used to Generate the Configuration for various SASS Aased Applications.
+Configuration Tools Used to Generate the Configuration for various SASS Based Applications.
 
 ## Configuration File Template
 
 ```json
 [
-    {
-        "Name": "<AppName>",
-        "Code": "<appCode>",
-        "Envirnoments": [
-             {
-                "EnvName": "<envName>",
-                "EnvConfig": {
-                   "Key":  "Value"
-                }
-            }
-        ]
-    }
+  {
+    "Name": "<AppName>",
+    "Code": "<appCode>",
+    "Envirnoments": [
+      {
+        "EnvName": "<envName>",
+        "EnvConfig": {
+          "Key": "Value"
+        }
+      }
+    ]
+  }
 ]
 ```
 
-Example 
+Example
 
-```json 
+```json
 [
-    {
-        "Name": "Sample App",
-        "Code": "sample",
-        "Envirnoments": [
-             {
-                "EnvName": "cdev",
-                "EnvConfig": {
-                   "Key":  "Value"
-                }
-            }
-        ]
-    }
+  {
+    "Name": "Sample App",
+    "Code": "sample",
+    "Envirnoments": [
+      {
+        "EnvName": "cdev",
+        "EnvConfig": {
+          "Key": "Value"
+        }
+      }
+    ]
+  }
 ]
 ```
 
@@ -52,38 +54,56 @@ npm install -g @lazh/config
 
 ## Usage
 
-To Generate Configuration for App with its Environment.
+### Commands :
 
-```node
-lzconfig --path=<path> --app=<appname> --env=<environment> --output=<output-path>
-```
+1. **Generate**
 
-Example
+   - To Generate Configuration for App with its Environment.
+   - Parameters:
+     | Params | Description | Is Mandatory |
+     | ----- | ------- | ------ |
+     | path | To Provide Configuration File Path | Yes |
+     | app | Name of the App available in Configuration | Yes |
+     | env | Environment of the App available in Configuration | Yes |
+     | output | Create config file with provided directory | No |  
+     | | |
+   - To Use
 
-```node
-lzconfig --path=input.json --app=sample --env=cdev --output=e:\assets\config
-```
+     ```node
+     lzconfig generate --path=<path> --app=<appname> --env=<environment> --output=<output-path>
 
-### Parameters :
+     lzconfig generate -p=<path> -a=<appname> -e=<environment> -o=<output-path>
 
-1. **Path**
-    - To Provide Configuration File Path.
-    
-1. **App** 
-    - Name of the App available in Configuration.
+     lzconfig generate -p <path> -a <appname> -e <environment> -o <output-path>
+     ```
 
-1. **Env**
-    - Environment of the App available in Configuration.
+   - Example
 
-1. **Output** 
-    - Optional parameter to create config file with directory.
-    - Default Path: Currently Directory + /dist/appname/environment.
+     ```node
+     lzconfig generate --path=input.json --app=sample --env=cdev --output=e:\assets\config
 
-### Output : 
+     lzconfig generate -p=input.json -a=sample -e=cdev -o=e:\assets\config
 
-- **Config.json** File will be generated with default or Specified Output Path.
+     lzconfig generate -p input.json -a sample -e cdev -o e:\assets\config
+     ```
+   - Output
 
+     - **Config.json** File will be generated with default or Specified Output Path.
+1) **Help**
+
+   - Name of the App available in Configuration.
+   - To Use
+     ```node
+     lzconfig help | --help | -h
+     ```
+
+1) **Version**
+   - Environment of the App available in Configuration.
+   - To Use
+     ```node
+     lzconfig version | --version | -v
+     ```
 
 ## License
 
-This plugin was created under the MIT license.
+This Package was created under the MIT license.

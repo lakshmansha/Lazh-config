@@ -1,28 +1,40 @@
 {
   "name": "@lazh/config",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "configuration file generation solution for various environments in SASS Apps.",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index",
-    "build": "",
-    "test": "mocha"
+  "author": "Lakshman.S",
+  "license": "MIT",
+  "homepage": "https://github.com/lakshmansha/Lazh-config#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lakshmansha/Lazh-config.git"
   },
   "keywords": [
     "config",
+    "generate",
     "12Factor",
+    "devops",
     "cli"
   ],
-  "bin": {
-    "lzconfig": "index.js"
-  },
-  "author": "Lakshman.S",
-  "license": "ISC",
-  "dependencies": {
-    "colors": "^1.4.0"
-  },
+  "preferGlobal": true,
   "publishConfig": {
     "access": "public"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "bin": {
+    "lzconfig": "bin/config.js"
+  },
+  "scripts": {
+    "start": "node bin/config",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "@lazh/logger": "0.0.0",
+    "colors": "^1.4.0",
+    "minimist": "^1.2.5",
+    "ora": "^4.0.4"
   },
   "devDependencies": {
     "chai": "^4.2.0",
