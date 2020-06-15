@@ -1,7 +1,8 @@
 var fs = require('fs');
 var colors = require('colors');
 
-var logger = require('./helper/logger');
+const validator = require('./utils/validator');
+const directory = require('./utils/directory');
 
 var common = require('./common');
 var logic = require('./logic');
@@ -9,7 +10,7 @@ var logic = require('./logic');
 const log = new logger.Logger();
 const LogLevel = logger.LogLevel;
 
-log.enableProductionMode();
+log.enableProductionMode(LogLevel.Info);
 
 async function onInit(params) {
     return new Promise(async (resolve, reject) => {
@@ -17,16 +18,16 @@ async function onInit(params) {
             var file_directory =  "";             
             var output = params['output'];
 
-            if(common.isValid(output)) {
+            if(validator.isValid(output)) {
                 file_directory = output;                   
             } else {
                 file_directory = `.\\dist\\${params['app']}\\${params['env']}`;
-            }                    
+            }
 
             var path = params['path'];
-            if (!common.isValid(path)) { reject('Pass the Configuration Path to generate Config. eg: --path=path/env-input.json'); return; }
-            const _path = await logic.getFilePath(path);
-            if (!common.isValid(_path)) {
+            if (!validator.isValid(path)) { reject('Pass the Configuration Path to generate Config. eg: --path=path/env-input.json'); return; }
+            const _path = await directory.IsFilePathExist(path);
+            if (!validator.isValid(_path)) {
                 reject('Please provide the Valid Configuration Path');
                 return;
             }
@@ -35,7 +36,7 @@ async function onInit(params) {
             log.info('\r');
 
             var app = params['app'];
-            if (!common.isValid(app)) { reject('Pass the Parameter App to generate Config. eg: --app=<app>'); return; }
+            if (!validator.isValid(app)) { reject('Pass the Parameter App to generate Config. eg: --app=<app>'); return; }
             const _app = logic.IsAppExist(app, _path);
             if (!_app) {
                 reject('Please provide the Valid App Name');
@@ -45,7 +46,7 @@ async function onInit(params) {
             log.info(`${colors.green("App Name")} : ${colors.bgGreen(app)}`);
 
             var envs = params['env'];
-            if (!common.isValid(envs)) { reject('Pass the Parameter Env to generate Config. eg: --env=<env>'); return; }
+            if (!validator.isValid(envs)) { reject('Pass the Parameter Env to generate Config. eg: --env=<env>'); return; }
             const _env = logic.IsEnvExist(app, envs, _path);
             if (!_env) {
                 reject('Please provide the Valid Envirnoment Name');
@@ -57,7 +58,7 @@ async function onInit(params) {
 
             var config = await logic.generateConfig(app, envs, _path);
 
-            if (common.isValid(config.message)) {
+            if (validator.isValid(config.message)) {
                 reject(config.message);
                 return;
             }
@@ -73,8 +74,8 @@ async function onInit(params) {
             if (LogLevel.Off === log.level()) {
                 resolve(true);
             } else {
-                const folder_path = await common.createDirectories(file_directory);
-                if (common.isValid(folder_path)) {
+                const folder_path = await directory.createDirectories(file_directory);
+                if (validator.isValid(folder_path)) {
                     var file_outputName = `${folder_path}\\config.json`;
                     log.info(`${colors.magenta("Created Configuration File Path for Envirnonment")}`);
 
@@ -90,8 +91,8 @@ async function onInit(params) {
                         log.info(`${colors.green("Generated File Located Path")}: ${colors.green(dir_path)}`);
                         const isExist = await logic.getFilePath('/temp');
                         let rmstatus = false;
-                        if(common.isValid(isExist)) {
-                            rmstatus = await common.deleteDirectories('/temp');
+                        if(validator.isValid(isExist)) {
+                            rmstatus = await directory.deleteDirectories('/temp');
                             resolve(true);
                         } else {
                             resolve(true);
