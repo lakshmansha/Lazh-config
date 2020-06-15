@@ -119,5 +119,5 @@ dist
 
 bin
 
-# Remove Config
-input.json
+old_files
+old_test
