@@ -1,5 +1,9 @@
 # Release History
 
+## Version 1.0.1:
+
+- Bug Fixes on Installation.
+
 ## Version 1.0.0:
 
 - Refactored the CLI with Help Options.
