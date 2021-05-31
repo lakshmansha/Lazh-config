@@ -9,6 +9,7 @@ module.exports = async (args, log) => {
 
     try {
         const path = args.path || args.p;
+        const url = args.url || args.u;
         const app = args.app || args.a;
         const env = args.env || args.e;
         const output = args.output || args.o;
